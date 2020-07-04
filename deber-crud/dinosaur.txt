@@ -1,0 +1,3 @@
+3, Triceratops, 12.5, 500, Negro, True
+4, Diplodocus, 20, 500, Azul, True
+1, Protoceratops, 5, 500, Verde, False
