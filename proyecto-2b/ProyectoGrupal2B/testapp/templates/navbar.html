@@ -1,0 +1,116 @@
+﻿<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!--    <link href="{{ url_for('static',filename='styles/style.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href='https://use.fontawesome.com/releases/v5.5.0/css/all.css'>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='javascript/main.js') }}"></script>
+    <script src="{{ url_for('static',filename='styles/semantic.js') }}"></script>
+    <link href="{{ url_for('static',filename='styles/semantic.css') }}" rel="stylesheet" type="text/css">
+    <!--<link href="{{ url_for('static',filename='styles/common.css') }}" rel="stylesheet" type="text/css">-->
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Bienvenidos</title>
+    {% endif %}
+</head>
+
+
+
+<body>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+
+
+    <div class="ui stackable menu" id="myTopnav">
+        <a class="item" href="/index"> Portal de Trabajo</a>
+
+        <div class="right menu">
+            {% if current_user.is_authenticated %}
+
+            {% if current_user.tipoUser == "admin" %}
+            <a class="item" href="/UsuariosBloqueados"><i class="user times icon"></i>Usuarios Bloqueados</a>
+            <div class="ui simple dropdown labeled item">
+                <i class="users icon"></i>
+                Artesanos
+                <div class="menu">
+                    <a class="item" href="/BusquedaAdministrador"><i class="search icon"></i>Buscar Artesano</a>
+                </div>
+            </div>
+
+            {% elif current_user.tipoUser == "artesano" %}
+            <div class="ui simple dropdown item">
+                <i class="users icon"></i>
+                Artesanos
+                <div class="menu">
+                    <a class="item" href="/BusquedaArtesanos"><i class="search icon"></i>Buscar Artesano</a>
+                    <a class="item" href="/RegistrarArtesano/{{current_user.id}}"><i class="address card icon"></i>Registrar
+                        Datos</a>
+                    <a class="item" href="/InscripcionCurso/{{current_user.id}}"><i class="clipboard outline icon"></i>Inscripcion a Curso</a>
+                </div>
+            </div>
+
+            {% endif %}
+
+            {% if current_user.tipoUser == "cliente" %}
+
+            <div class="ui simple dropdown item">
+                <i class="users icon"></i>
+                Clientes
+                <div class="menu">
+                    <a class="item" href="/BusquedaCliente"><i class="search icon"></i>Buscar Artesanos</a>
+                    <a class="item" href="/Convenios/{{current_user.id}}"><i class="list alternate outline icon"></i> Convenios</a>
+                </div>
+            </div>
+
+            {% endif %}
+
+            {% if current_user.tipoUser == "admin" %}
+            <div class="ui simple dropdown item">
+                <i class="table icon"></i>
+                Cursos
+                <div class="menu">
+                    <a class="item" href="/CrearCurso"><i class="users icon"></i>Crear Cursos</a>
+                    <a class="item" href="/InfoCurso"><i class="book icon"></i>Informacion de Curso</a>
+                    <a class="item" href="/ListarCursos"><i class="list alternate outline icon"></i>Listar Cursos</a>
+                </div>
+            </div>
+            {% endif %}
+            {% endif %}
+            {% if current_user.is_anonymous %}
+            <a class="item" href="/BusquedaArtesanos"><i class="search icon"></i>Buscar Artesanos</a>
+            {% endif %}
+            {% if current_user.is_anonymous %}
+            <a class="item" href="/Login" class="active"><i class="user icon"></i>Login</a>
+            {% else %}
+            <div class="ui simple dropdown item">
+                <i class="user circle icon"></i>
+                {{current_user.nombres}}
+                <div class="menu">
+                    <a class="item" href="/CambiarContraseña"><i class="edit icon"></i>Cambiar Contraseña</a>
+                    <a class="item" href="/Logout"><i class="power off icon"></i>Logout</a>
+                </div>
+            </div>
+
+
+            {% endif %}
+        </div>
+    </div>
+    <div class="ui container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

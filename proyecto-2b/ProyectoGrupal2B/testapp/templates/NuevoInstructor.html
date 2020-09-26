@@ -1,0 +1,64 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+{% if id %}
+<input type="hidden" value="{{ id }}" id="hiddenId" />
+{% endif %}
+<script src="{{ url_for('static',filename='javascript/registrarInstructor.js') }}"></script>
+<script src="{{ url_for('static',filename='javascript/limpiarCampos.js') }}"></script>
+<script src="{{ url_for('static',filename='javascript/validacionesGenerales.js') }}"></script>
+<script src="{{ url_for('static',filename='javascript/validarDatosNuevoInstructor.js') }}"></script>
+
+<h1 class="ui centered align header"> Registrar un nuevo Instructor</h1>
+
+<div class="ui form">
+    <div class="field">
+        <label>Tipo de Identificacion:</label>
+        <div>
+            <select id="tipoID" class="ui fluid dropdown">
+                <option value="cedula">Cedula</option>
+                <option value="pasaporte">Pasaporte</option>
+                <option value="ruc">RUC</option>
+            </select>
+        </div>
+    </div>
+    <div class="field">
+        <label>Numero de Identificacion:</label>
+        <input type="text" id="id">
+    </div>
+    <div class="field">
+        <label> Nombres:</label>
+        <input type="text" id="nombres" />
+    </div>
+    <div class="field">
+        <label>Apellidos:</label>
+        <input type="text" id="apellidos" />
+    </div>
+    <div class="field">
+        <label>Telefono de contacto:</label>
+        <input type="text" id="telefono" />
+    </div>
+
+    <div class="ui stackable five column centered grid">
+        <div class="column">
+            <a onclick="validarDatosNuevoInstrcutor()" class="ui blue submit button">
+                <i class="save outline icon"></i>
+                Guardar
+            </a>
+        </div>
+        <div class="column">
+            <a class="ui labeled icon button" onclick="limpiarCamposRegistrarInstructor()">
+                <i class="trash alternate outline icon"></i>
+                Limpiar Campos
+            </a>
+        </div>
+        <div class="column">
+            <a class="ui labeled green icon button" onclick="document.location.href='/InfoCurso'">
+                <i class="arrow left icon"></i>
+                Regresar
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

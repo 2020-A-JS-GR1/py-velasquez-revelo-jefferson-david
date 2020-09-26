@@ -1,0 +1,20 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+    <h1 class="ui center aligned header"> {{message}} </h1>
+    {% endfor %}
+{% else %}
+<h1 class="ui center aligned header">Bienvenido {{current_user.nombres}}</h1>
+{% endif %}
+{% endwith %}
+<div class="ui container">
+    <div class="ui raised very padded text container segment">
+    Reciba un cordial saludo de parte de quienes conformamos el Portal de Trabajo.</br>
+    Esta página tiene como fin facilitar la búsqueda de empleados y empleadores del sector artesanal de la construcción.
+    </div>
+</div>
+{% endblock %}

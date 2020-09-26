@@ -1,0 +1,31 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+<script src="{{ url_for('static',filename='javascript/validacionesGenerales.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static',filename='javascript/validarDatosCambiarContraseña.js') }}"></script>
+<script src="{{ url_for('static',filename='javascript/cambiarContraseña.js') }}"></script>
+
+{% if id %}
+<input type="hidden" value="{{ id }}" id="hiddenId" />
+{% endif %}
+
+<h1>Cambiar Contraseña</h1>
+<form class="ui form" action='CambiarContraseña' method='POST'>
+    <div class="field">
+        <label>Contraseña Actual:</label>
+        <input type="password" name="password" id="password" size="40" onchange="cambiarColorCampo(this)">
+    </div>
+    <div class="field">
+        <label>Nueva Contraseña:</label>
+        <input type="password" name="newpassword" id="newpassword" size="40" onchange="cambiarColorCampo(this)">
+    </div>
+    <div class="field">
+        <label>Repetir Nueva Contraseña:</label>
+        <input type="password" name="newpassword2" id="newpassword2" size="40" onchange="cambiarColorCampo(this)">
+    </div>
+    <div class="field">
+        <a class= "ui green button" id="btnSubmit" onclick="validarDatosCambiarContraseña()">Cambiar Contraseña</a>
+    </div>
+</form>
+
+{% endblock %}
